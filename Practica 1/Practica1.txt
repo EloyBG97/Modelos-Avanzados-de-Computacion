@@ -1,0 +1,164 @@
+1. Visitar la página http://morphett.info/turing/turing.html y probar el simulador de Máquinas
+de Turing con todos los ficheros de prueba.
+
+
+
+
+2. Introducir dos ejemplos que hayamos visto en clase de teorı́a en el simulador.
+
+Ejemplo 1: pagina 7 - tema 1
+L = {0^n1^n}
+0 0 X r 1
+0 Y Y r 3
+
+1 0 0 r 1
+1 1 Y l 2
+1 Y Y r 1
+
+2 0 0 l 2
+2 X X r 0
+2 Y Y l 2
+
+3 Y Y r 3
+3 _ _ r halt-accept
+
+Ejemplo 2: pagina 43 - tema 1
+Resta unaria
+
+0 0 _ r 1
+0 1 _ r 5
+
+1 0 0 r 1
+1 1 1 r 2
+
+2 0 1 l 3
+2 1 1 r 2
+2 _ _ l 4
+
+3 0 0 l 3
+3 1 1 l 3
+3 _ _ r 0
+
+4 0 0 l 4
+4 1 _ l 4
+4 _ 0 r halt-accept
+
+5 0 _ r 5
+5 1 _ r 5
+5 _ _ r halt-accept
+
+
+
+
+3. Programar MTs para los lenguajes del ejercicio 1 de la Relación 1.
+1. Diseñar máquinas de Turing para los siguientes lenguajes:
+(a) Palabras sobre el alfabeto {0, 1} con el mismo número de ceros que de unos.
+0 0 X r 1
+0 Y Y r 3
+
+1 0 0 r 1
+1 1 Y l 2
+1 Y Y r 1
+
+2 0 0 l 2
+2 X X r 0
+2 Y Y l 2
+
+3 Y Y r 3
+3 _ _ r halt-accept
+
+ 
+(b) L = {a^n b^n c^n |n ≥ 1}        *UTILIZO EL EJEMPLO 2 COMO SUBRUTINA*
+
+0 a X r 1
+0 Y Y r 3
+
+1 a a r 1
+1 b Y l 2
+1 Y Y r 1
+
+2 a a l 2
+2 X X r 0
+2 Y Y l 2
+
+3 Y Y * 4
+
+4 Y Y l 4
+4 X X r 5
+
+5 Y N r 6
+5 Z Z r 8
+
+6 Y Y r 6
+6 c Z l 7
+6 Z Z r 6
+
+7 Y Y l 7
+7 N N r 5
+7 Z Z l 7
+
+8 Z Z r 8
+8 _ _ * halt-accept
+
+
+(c) {ww^−1 | w ∈ {0, 1}^*}
+
+;Lee el 1º carácter de la palabra en ese momento / Si no hay más carácteres acepta
+0 0 _ r 1
+0 1 _ r 4
+0 _ _ * halt-accept
+
+;Hasta el último carácter no leido (Buscando 0)
+1 0 0 r 1
+1 1 1 r 1
+1 _ _ l 2
+
+;Comprueba que el último carácter sea igual que el primero (0) / Si no hay más carácteres acepta
+2 0 _ l 3
+2 _ _ * halt-accept
+
+;Vuelta atrás
+3 0 0 l 3
+3 1 1 l 3
+3 _ _ r 0
+
+;Hasta el último carácter no leido (Buscando 1)
+4 0 0 r 4
+4 1 1 r 4
+4 _ _ l 5
+
+;Comprueba que el último carácter sea igual que el primero (1) / Si no hay más carácteres acepta
+5 1 _ l 3
+5 _ _ * halt-accept
+
+(d) {wcw | w ∈ {0, 1}^* }
+
+;Lee el 1º carácter de la palabra en ese momento / Si lee el carácter centinela (c) acepta
+0 0 _ r 1
+0 1 _ r 4
+0 c _ * halt-accept
+
+;Busca la segunda parte de la palabra (derecha del centinela , buscando 0)
+1 0 0 r 1
+1 1 1 r 1
+1 c c r 2
+
+;Busca el 1º caracter de la segunda parte de la palabra no leido (buscando 0)
+2 X X r 2
+2 0 X l 3
+
+;Vuelta atrás
+3 0 0 l 3
+3 1 1 l 3
+3 X X l 3
+3 c c l 3
+3 _ _ r 0
+
+;Busca la segunda parte de la palabra (derecha del centinela , buscando 1)
+4 0 0 r 4
+4 1 1 r 4
+4 c c r 5
+
+;Busca el 1º caracter de la segunda parte de la palabra no leido (buscando 1)
+5 X X r 5
+5 1 X l 3
