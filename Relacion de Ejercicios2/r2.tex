@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage[spanish, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+
+\title{Practica 1: Modelos Avanzados de Computación}
+\author{Eloy Bedia García}
+\date{13 de Marzo de 2018}
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\section{EJERCICIO 1}
+
+Describir de manera informal MTs con varias cintas que enumeren (produzcan como salida una lista que contenga todas sus palabras) los siguientes lenguajes (se supone que los números se escriben en binario):\\
+
+(a) El conjunto de los cuadrados perfectos.\\
+
+\hspace{1cm}$n^{2} = \sum_{k=1}^{n} (2k - 1) = (n - 1)^{2} + (2n - 1), \forall n\in\mathbb{N}$ \\
+
+\hspace{1cm}Cinta 1: $n^{2}, n\in\mathbb{N}$
+
+\hspace{1cm}Cinta 2: $n\in\mathbb{N}$
+
+\hspace{1cm}Cinta 3: Calculos Auxiliares\\
+
+\hspace{1cm}Inicilización:
+
+\hspace{1.5cm}Cinta 1 $\leftarrow$ 0
+
+\hspace{1.5cm}Cinta 2 $\leftarrow$ 0
+
+\hspace{1.5cm}Cinta 3 $\leftarrow \emptyset$\\
+
+\hspace{1cm}Mientras SIEMPRE:
+
+\hspace{1.5cm}Añadir $X$ al final de la Cinta 1 como separador
+
+\hspace{1.5cm}Incrementar $n$ en la Cinta 2
+
+\hspace{1.5cm}Copiar Cinta 2 en Cinta 3
+
+\hspace{1.5cm}Añadir $0$ al final de $n$ la Cinta 3 ($2n$)
+
+\hspace{1.5cm}Decrementar $n$ en la Cinta 3 ($2n - 1$)
+
+\hspace{1.5cm}Sumar último $n^{2}$ de la Cinta 1 a la Cinta 3
+
+\hspace{1.5cm}Añadir Cinta 3 a la Cinta 1
+
+\hspace{1.5cm}Borrar Cinta 3
+
+\newpage
+
+
+(b) El conjunto de todos los naturales primos.\\
+
+\hspace{1cm}Cinta 1: Números Primos
+
+\hspace{1cm}Cinta 2: $n \in \mathbb{N}$
+
+\hspace{1cm}Cinta 3: Calculos Auxiliares
+
+\hspace{1cm}Cinta 4: Contador
+
+\hspace{1cm}Cinta 3: Contador Auxiliar\\
+
+\hspace{1cm}Inicialización
+
+\hspace{1.5cm}Cinta 1 $\leftarrow$ 2
+
+\hspace{1.5cm}Cinta 2 $\leftarrow$ 2
+
+\hspace{1.5cm}Cinta 3 $\leftarrow \emptyset$
+
+\hspace{1.5cm}Cinta 4 $\leftarrow 1$
+
+\hspace{1.5cm}Cinta 3 $\leftarrow \emptyset$\\
+
+\hspace{1cm}Mientras SIEMPRE:
+
+\hspace{1.5cm}Añadir $X$ al final de la Cinta 1 como separador
+
+\hspace{1.5cm}Incrementar $n$ en la Cinta 2
+
+\hspace{1.5cm}Copiar Contador 4 en Cinta 5
+
+\hspace{1.5cm}Mientras Cinta 5 $<$ 0:
+
+\hspace{2cm}Copiar Cinta 2 en Cinta 3
+
+\hspace{2cm}Dividir Cinta 2 entre Nº Prmo de la Cinta 1\\
+
+\hspace{2cm}Si el resto de la division es = 0:
+
+\hspace{2.5cm}Descartar numero (Salir del bucle))\\
+
+\hspace{2cm}Si Cinta 5 = 0:
+
+\hspace{2.5cm}Añadir Cinta 2 a Cinta 1
+
+\hspace{2.5cm}Incrementar Cinta 4\\
+
+\hspace{2cm}En otro caso:
+
+\hspace{2.5cm}Elegir siguiente número primo
+
+\hspace{2.5cm}Decrementar Cinta 5
+
+
+\newpage
+
+(c) El conjunto de todos los números naturales $n$ tales que la MT cuya descripción es la palabra $w_{n}$ acepta la palabra $w_{n}$ como entrada ($w_{n}$ es la palabra sobre {0, 1} cuyo número asociado es $n$).\\
+
+\hspace{1cm}Cinta 1: $n\in\mathbb{N}$ aceptados
+
+\hspace{1cm}Cinta 2: $n\in\mathbb{N}$
+
+\hspace{1cm}Cinta 3: Maquina de Turing codificada
+
+\hspace{1cm}Cinta 4: Palabra\\
+
+\hspace{1cm}Inicilización:
+
+\hspace{1.5cm}Cinta 1 $\leftarrow \emptyset$
+
+\hspace{1.5cm}Cinta 2 $\leftarrow$ 1
+
+\hspace{1.5cm}Cinta 3 $\leftarrow \emptyset$
+
+\hspace{1.5cm}Cinta 4 $\leftarrow \emptyset$\\
+
+\hspace{1cm}Mientras SIEMPRE:
+
+\hspace{1.5cm}Copiar Cinta 2 en Cinta 3
+
+\hspace{1.5cm}Copiar Cinta 2 en Cinta 4
+
+\hspace{1.5cm}Ejecutar Maquina de Turing de la Cinta 3 sobre la Cinta 4\\
+
+\hspace{1.5cm}Si acepta la palabra
+
+\hspace{2cm}Añadir Cinta 2 a Cinta 1
+
+\hspace{2cm}Añadir $X$ como separador en la Cinta 1\\
+
+\hspace{1.5cm}Incrementar Cinta 2
+
+\newpage
+
+\section{EJERCICIO 2}
+
+Sean $L_{1} ,..., L_{k} (k \ge 2)$ un conjunto de lenguajes sobre el alfabeto A tales que:\\
+
+(a) Para cada $i \neq j$ , tenenos que $L_{i} \cap L_{j} = \emptyset$.
+
+(b) $\cup_{i=1}^{k} L_{i} = A^{*}$ .
+
+(c) $\forall i\in {1,..., k}$, el lenguaje $L_{i}$ es r.e.\\
+
+Demostrar que $\forall i\in {1,..., k}$, el lenguaje $L_{i}$ es recursivo. \\
+
+La unión de lenguajes es cerrada para los lenguajes r.e, es decir, la unión de dos lenguajes r.e, da otro lenguaje r.e.\\
+
+Según las condiciones (a) y (b), $\overline{L_{i}} = \cup_{j=0, i\neq j}^{k} L_{j}$\\
+
+Dicho esto, según la condición (c) y lo explicado anteriormente con respecto a la unión de lenguajes r.e, podemos confirmar que $\overline{L_{i}}$ es r.e.\\
+
+Como $\overline{L_{i}}$ y $L_{i}$ son recursivamente enumerables, entonces $L_{i}$ también es recursivo
+
+\newpage
+
+\section{EJERCICIO 3}
+
+Sea L r.e., pero no recursivo. Considérese el lenguaje
+
+$L'= \{0w | w \in L\} \cup \{1w | w \notin L\}$\\
+
+¿Puede asegurarse que $L'$ o su complementario son recursivos, r.e. o no r.e.?\\
+
+$L_{1} = \{0\}$
+
+$L_{2} = \{1\}$
+
+$L_{3} = \{0w|w\in L\} = L_{1}L$
+
+$L_{4} = \{1w|w\notin L\} = L_{2}\overline{L}$\\
+
+$L_{1}$ y $L_{2}$ son recursivamente enumerables y recursivos.\\
+
+$L'= L_{3} \cup L_{4}$\\
+
+
+Como la unión de lenguajes es cerrada para los lenguajes r.e y recursivos, entonces:
+
+\hspace{1cm} Si $L_{3}$ y $L_{4}$ son r.e, entonces $L'$ será r.e.
+
+\hspace{1cm} Si $L_{3}$ y $L_{4}$ son r, entonces $L'$ será r.\\
+
+Como la concatenación de lenguajes es cerrada para los lenguajes r.e y recursivos
+
+\hspace{1cm} a) $L_{3} = L_{1}L$, sabemos que $L_{1}$ es r y r.e; y $L$ es r.e pero no r, por tanto $L_{3}$ es r.e.\\
+
+
+
+\hspace{1cm} b) $L_{4} = L_{2}\overline{L}$, sabemos que $L_{2}$ es r y r.e; pero como el complemento de un lenguaje r.e es tambien r.e si y solo si el lenguaje tambien es recursivo, $\overline{L}$ no es ni r.e ni r, por tanto no podemos asegurar nada sobre $L_{4}$\\
+
+$\overline{L'} = \overline{L_{3} \cup L_{4}} = \overline{L_{3}} \cap \overline{L_{4}} = \overline{L_{1}L} \cap \overline{L_{2}}L$\\
+
+En el caso del complementario nos pasaría lo contrario, no podemos asegurar nada de $\overline{L_{3}}$ sin embargo podemos asegurar que, $\overline{L_{4}}$ es r.e.\\
+
+Respondiendo a la pregunta, no puedo asegurar nada con respecto a $L'$ o $\overline{L'}$
+
+
+\end{document}

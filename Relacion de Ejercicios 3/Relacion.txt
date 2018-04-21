@@ -1,0 +1,109 @@
+//2. Construir un programa Post-Turing que dado un número u en binario calcule u + 1.
+
+[A] IF 0 GOTO [A]
+    IF 1 GOTO [A]
+  
+    LEFT
+    
+[B] IF 1 GOTO [C]
+    IF 0 GOTO [D]
+
+[C] PRINT 0
+    LEFT
+    IF 1 GOTO [C]
+
+[D] PRINT 1
+    HALT
+
+//4. Construir un programa con variables que concatene dos cadenas sobre {0, 1}. Se supone que ambas cadenas están en las variables X1 y X2 y la salida en la variable Y .
+
+
+[A] IF X1 ENDS 0 GOTO B
+    IF X1 ENDS 1 GOTO C
+    GOTO D
+
+[B] A <- 0A
+    X1 <- X1-
+    IF X1 ENDS 0 GOTO B
+    IF X1 ENDS 1 GOTO C
+    GOTO D
+
+[C] A <- 1A
+    X1 <- X1-
+    IF X1 ENDS 0 GOTO B
+    IF X1 ENDS 1 GOTO C
+
+[D] IF X2 ENDS 0 GOTO E
+    IF X2 ENDS 1 GOTO F
+    GOTO G
+
+[E] A <- 0A
+    X2 <- X2-
+    IF X2 ENDS 0 GOTO E
+    IF X2 ENDS 1 GOTO F
+    GOTO G
+
+[F] A <- 1A
+    X2 <- X2-
+    IF X2 ENDS 0 GOTO E
+    IF X2 ENDS 1 GOTO F
+
+[G] IF A ENDS 0 GOTO H
+    IF A ENDS 1 GOTO I
+    GOTO J
+
+[H] Y <- 0Y
+    A <- A-
+    IF A ENDS 0 GOTO H
+    IF A ENDS 1 GOTO I
+    GOTO J
+
+[I] Y <- 1Y
+    A <- A-
+    IF A ENDS 0 GOTO H
+    IF A ENDS 1 GOTO I
+
+[J] HALT
+
+//7. Construir un programa con variables que dada una cadena u ∈ {0, 1} ∗ calcule la cadena w formada por los sı́mbolos que ocupan las posiciones impares de u y en el mismo orden que aparecen en u.
+
+[A] IF U ENDS 0 GOTO B
+    IF U ENDS 1 GOTO C
+    GOTO D
+
+[B] A <- 0A
+    U <- U-
+    IF U ENDS 0 GOTO B
+    IF U ENDS 1 GOTO C
+    GOTO D
+
+[C] A <- 1A
+    U <- U-
+    IF U ENDS 0 GOTO B
+    IF U ENDS 1 GOTO C
+
+[D] IF A ENDS 0 GOTO E
+    IF A ENDS 1 GOTO F
+    GOTO G
+
+[E] W <- 0W
+    A <- A-
+    A <- A-
+    IF A ENDS 0 GOTO E
+    IF A ENDS 1 GOTO F
+    GOTO G
+
+[F] W <- 1W
+    A <- A-
+    A <- A-
+    IF A ENDS 0 GOTO E
+    IF A ENDS 1 GOTO F
+
+[G] HALT
+
+//8. Construir un programa con variables sobre {a, b} que dadas dos cadenas u 1 , u 2 ∈ {a, b} ∗ calcule la cadena u cuyo número verifica Z(u) = Z(u 1 ) + Z(u 2 ) (es decir hacer la suma de números representados por cadenas de caracteres sobre {a, b}.
+
+    
+
+
+    
